@@ -1,6 +1,6 @@
 import React from "react";
 import "./RedditPosts.css";
-import redditLogo from "/home/grantwe/development/phase2/projectPhase2/client/src/media/Reddit_Mark_OnWhite.png";
+import redditLogo from "/home/grantwe/project2/client/src/media/Reddit_Mark_OnWhite.png";
 
 function RedditPosts({ article }) {
   console.log(article);
