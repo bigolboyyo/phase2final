@@ -1,0 +1,20 @@
+.liveChat {
+  display: flex;
+  background-color: tomato;
+  flex-direction: row;
+  justify-content: center;
+  margin: 25px;
+}
+
+#sendMsg,
+#sendBtn {
+  height: 2vh;
+}
+
+#sendMsg {
+  width: 10vw;
+}
+
+#sendBtn {
+  width: 3vw;
+}

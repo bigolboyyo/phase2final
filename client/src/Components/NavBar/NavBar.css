@@ -1,0 +1,8 @@
+.navBar {
+  background-image: linear-gradient(to left, #fe4880, #ffce00);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  height: 3vh;
+  align-items: center;
+}
