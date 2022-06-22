@@ -3,6 +3,9 @@ import "./LiveChat.css";
 import ChatRoom from "../ChatRoom/ChatRoom";
 import io from "socket.io-client";
 
+const project2branch = console.log("branch 2 created");
+console.log(project2branch);
+
 const socket = io.connect("http://localhost:5050/");
 
 export default function LiveChat() {
