@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./LiveChat.css";
 import ChatRoom from "../ChatRoom/ChatRoom";
-
 import io from "socket.io-client";
-const socket = io.connect("http://localhost:5050/");
+
+const socket = "http://localhost:5050/";
 
 export default function LiveChat() {
   useEffect(() => {
