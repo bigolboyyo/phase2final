@@ -1,20 +1,20 @@
 .liveChat {
   display: flex;
   background-color: tomato;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   margin: 25px;
+  align-items: center;
 }
 
-#sendMsg,
-#sendBtn {
-  height: 2vh;
-}
-
-#sendMsg {
-  width: 10vw;
-}
-
-#sendBtn {
+#joinRoomBtn {
   width: 3vw;
+  height: 2vh;
+  margin: 5px;
+}
+
+#room_username,
+#room_id {
+  height: 2vh;
+  width: 12vw;
 }
