@@ -9,6 +9,7 @@ export default function RedditPage({
   setChatType,
   chatType,
   setRedditRoom,
+  setArtRef,
 }) {
   const [articles, setArticles] = useState([]);
   const [subreddit, setSubreddit] = useState("webdev");
@@ -54,6 +55,7 @@ export default function RedditPage({
               setChatType={setChatType}
               chatType={chatType}
               setRedditRoom={setRedditRoom}
+              setArtRef={setArtRef}
             />
           ))
         : ""}

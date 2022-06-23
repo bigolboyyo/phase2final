@@ -20,6 +20,8 @@ function App() {
 
   const [redditRoom, setRedditRoom] = useState("");
 
+  const [artRef, setArtRef] = useState({});
+
   return (
     <div className="App">
       <NavBar />
@@ -34,6 +36,7 @@ function App() {
               socket={socket}
               setShowChat={setShowChat}
               setRedditRoom={setRedditRoom}
+              setArtRef={setArtRef}
             />
           }
         />
@@ -49,7 +52,13 @@ function App() {
         />
         <Route
           path="/redditchat"
-          element={<RedditChat socket={socket} redditRoom={redditRoom} />}
+          element={
+            <RedditChat
+              socket={socket}
+              redditRoom={redditRoom}
+              artRef={artRef}
+            />
+          }
         />
       </Routes>
     </div>
