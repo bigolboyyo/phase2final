@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import "./ChatRoom.css";
 
 function ChatRoom({ socket, username, room }) {
@@ -30,20 +31,31 @@ function ChatRoom({ socket, username, room }) {
 
   return (
     <div className="chatDiv" style={{ padding: "25px", margin: "7vh" }}>
-      <div className="chat-header">
+      <div
+        style={{ border: "solid", padding: "0.5rem" }}
+        className="chat-header"
+      >
         <p>Live Chat</p>
       </div>
-      <div className="chat-body">
+      <div style={{ border: "solid", padding: "0.5rem" }} className="chat-body">
         {messageList.map((messageCont) => (
-          <div className="msgContent">
-            <h1>
-              {messageCont.author}: {messageCont.message}
-            </h1>
-            <p>Sent: {messageCont.time}</p>
+          <div key={uuidv4()} className="message">
+            <>
+              <div className="messageContent">
+                <p>{messageCont.message}</p>
+              </div>
+              <div className="messageMeta">
+                <p>{messageCont.time}</p>
+                <p>{messageCont.author}</p>
+              </div>
+            </>
           </div>
         ))}
       </div>
-      <div className="chat-footer">
+      <div
+        style={{ border: "solid", padding: "0.5rem" }}
+        className="chat-footer"
+      >
         <input
           type="text"
           placeholder="Hey!"
