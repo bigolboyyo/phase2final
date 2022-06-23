@@ -11,15 +11,11 @@ import RedditChat from "../Components/RedditChat/RedditChat";
 //branch4 commit
 
 const socket = io.connect("http://localhost:5050/");
+
 function App() {
-  console.log(socket);
-
   const [showChat, setShowChat] = useState(false);
-
   const [chatType, setChatType] = useState("/livechat");
-
   const [redditRoom, setRedditRoom] = useState("");
-
   const [artRef, setArtRef] = useState({});
 
   return (

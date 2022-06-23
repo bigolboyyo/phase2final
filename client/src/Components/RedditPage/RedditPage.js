@@ -30,8 +30,6 @@ export default function RedditPage({
     );
   }, [subreddit]);
 
-  console.log(articles);
-
   return (
     <div className="redditPage">
       <label id="redSearchIndicator">

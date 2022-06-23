@@ -1,6 +1,60 @@
 {
-  "posts": [{ "id": 1, "title": "json-server", "author": "typicode" }],
-  "comments": [{ "id": 1, "body": "some comment", "postId": 1 }],
-  "profile": { "name": "typicode" },
-  "test": { "test": "test" }
+  "rooms": [
+    {
+      "username": "example",
+      "id": "mJryHzB"
+    },
+    {
+      "username": "example",
+      "id": "2_bLmPf"
+    },
+    {
+      "username": "example",
+      "id": "E0loBkV"
+    },
+    {
+      "username": "example",
+      "id": "rAtqNi8"
+    },
+    {
+      "username": "example",
+      "id": "ioEh6ih"
+    },
+    {
+      "username": "example",
+      "id": "WjRKk_2"
+    },
+    {
+      "username": "example",
+      "id": "HrhjFqk"
+    },
+    {
+      "username": "example",
+      "id": "Evc5KC1"
+    },
+    {
+      "username": "example",
+      "id": "685FimF"
+    },
+    {
+      "username": "example",
+      "id": "ufMWpUZ"
+    },
+    {
+      "username": "example",
+      "id": "rQFOAB1"
+    },
+    {
+      "username": "example",
+      "id": "1H448FJ"
+    },
+    {
+      "username": "example",
+      "id": "IfwaVv5"
+    },
+    {
+      "username": "example",
+      "id": "o0DkAhC"
+    }
+  ]
 }

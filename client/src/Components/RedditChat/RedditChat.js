@@ -18,7 +18,6 @@ function RedditChat({ socket, article, redditRoom, artRef }) {
           ":" +
           new Date(Date.now()).getMinutes(),
       };
-
       await socket.emit("send_message", messageData);
       setMessageList((list) => [...list, messageData]);
     }
