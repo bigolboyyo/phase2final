@@ -15,11 +15,11 @@ export default function LiveChat() {
 
   const userStateCheck = userName !== "" && room !== "";
 
-  useEffect(() => {
-    const socket = io.connect("http://localhost:5050/");
+  // useEffect(() => {
+  //   const socket = io.connect("http://localhost:5050/livechat");
 
-    return () => socket.disconnect();
-  }, []);
+  //   return () => socket.disconnect();
+  // }, []);
 
   const joinRoom = () => {
     if (userStateCheck) {
