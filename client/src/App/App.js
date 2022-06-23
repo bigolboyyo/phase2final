@@ -8,6 +8,8 @@ import RedditPage from "../Components/RedditPage/RedditPage";
 import io from "socket.io-client";
 import RedditChat from "../Components/RedditChat/RedditChat";
 
+//branch4 commit
+
 const socket = io.connect("http://localhost:5050/");
 function App() {
   console.log(socket);
