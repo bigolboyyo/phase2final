@@ -3,7 +3,13 @@ import RedditPosts from "../RedditPosts/RedditPosts";
 import { v4 as uuidv4 } from "uuid";
 import "./RedditPage.css";
 
-export default function RedditPage({ setShowChat, socket }) {
+export default function RedditPage({
+  setShowChat,
+  socket,
+  setChatType,
+  chatType,
+  setRedditRoom,
+}) {
   const [articles, setArticles] = useState([]);
   const [subreddit, setSubreddit] = useState("webdev");
 
@@ -45,6 +51,9 @@ export default function RedditPage({ setShowChat, socket }) {
               article={article.data}
               setShowChat={setShowChat}
               socket={socket}
+              setChatType={setChatType}
+              chatType={chatType}
+              setRedditRoom={setRedditRoom}
             />
           ))
         : ""}

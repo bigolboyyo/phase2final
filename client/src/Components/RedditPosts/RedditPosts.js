@@ -1,15 +1,31 @@
 import React from "react";
 import "./RedditPosts.css";
 import redditLogo from "/home/grantwe/project2/client/src/media/Reddit_Mark_OnWhite.png";
-import { NavLink } from "react-router-dom";
-import io from "socket.io-client";
+import { useNavigate } from "react-router-dom";
+//import io from "socket.io-client";
 
-function RedditPosts({ article, socket, setShowChat }) {
+// let activeStyle = {
+//   textDecoration: "underline",
+// };
+
+function RedditPosts({
+  article,
+  socket,
+  // setShowChat,
+  // setChatType,
+  // chatType,
+  setRedditRoom,
+}) {
+  const navigate = useNavigate();
+
   console.log(socket);
 
   function handleChatClick() {
     socket.emit("join_room", article.id);
-    setShowChat(true);
+    // setShowChat(true);
+    // setChatType("/redditchat");
+    setRedditRoom(article.id);
+    navigate("/redditchat");
   }
 
   return (
@@ -36,6 +52,10 @@ function RedditPosts({ article, socket, setShowChat }) {
       </a>
       <span id="redUpvotes">Upvotes: {article.ups}</span>
 
+      {/* <Link
+        to="/livechat"
+        style={({ isActive }) => (isActive ? activeStyle : undefined)}
+      > */}
       <button
         onClick={handleChatClick}
         style={{ padding: "1rem" }}
@@ -43,6 +63,7 @@ function RedditPosts({ article, socket, setShowChat }) {
       >
         Start Chat
       </button>
+      {/* </Link> */}
     </article>
   );
 }

@@ -13,6 +13,13 @@ export default function LiveChat({ socket, setShowChat, showChat }) {
   const [userName, setUserName] = useState("");
   const [room, setRoom] = useState("");
 
+  const joinRoom = () => {
+    if (userStateCheck) {
+      socket.emit("join_room", room);
+      setShowChat(true);
+    }
+  };
+
   // const [showChat, setShowChat] = useState(false);
 
   const userStateCheck = userName !== "" && room !== "";
@@ -22,13 +29,6 @@ export default function LiveChat({ socket, setShowChat, showChat }) {
 
   //   return () => socket.disconnect();
   // }, []);
-
-  const joinRoom = () => {
-    if (userStateCheck) {
-      socket.emit("join_room", room);
-      setShowChat(true);
-    }
-  };
 
   return (
     <div id="prelogin">

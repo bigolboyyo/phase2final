@@ -6,12 +6,17 @@ import LiveChat from "../Components/LiveChat/LiveChat";
 import Home from "../Components/Home/Home";
 import RedditPage from "../Components/RedditPage/RedditPage";
 import io from "socket.io-client";
+import RedditChat from "../Components/RedditChat/RedditChat";
 
+const socket = io.connect("http://localhost:5050/");
 function App() {
-  const socket = io.connect("http://localhost:5050/");
   console.log(socket);
 
   const [showChat, setShowChat] = useState(false);
+
+  const [chatType, setChatType] = useState("/livechat");
+
+  const [redditRoom, setRedditRoom] = useState("");
 
   return (
     <div className="App">
@@ -20,7 +25,15 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route
           path="/redditpage"
-          element={<RedditPage socket={socket} setShowChat={setShowChat} />}
+          element={
+            <RedditPage
+              setChatType={setChatType}
+              chatType={chatType}
+              socket={socket}
+              setShowChat={setShowChat}
+              setRedditRoom={setRedditRoom}
+            />
+          }
         />
         <Route
           path="/livechat"
@@ -31,6 +44,10 @@ function App() {
               showChat={showChat}
             />
           }
+        />
+        <Route
+          path="/redditchat"
+          element={<RedditChat socket={socket} redditRoom={redditRoom} />}
         />
       </Routes>
     </div>
