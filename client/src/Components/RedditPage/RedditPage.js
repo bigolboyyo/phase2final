@@ -3,7 +3,7 @@ import RedditPosts from "../RedditPosts/RedditPosts";
 import { v4 as uuidv4 } from "uuid";
 import "./RedditPage.css";
 
-export default function RedditPage() {
+export default function RedditPage({ setShowChat, socket }) {
   const [articles, setArticles] = useState([]);
   const [subreddit, setSubreddit] = useState("webdev");
 
@@ -23,6 +23,8 @@ export default function RedditPage() {
     );
   }, [subreddit]);
 
+  console.log(articles);
+
   return (
     <div className="redditPage">
       <label id="redSearchIndicator">
@@ -38,7 +40,12 @@ export default function RedditPage() {
       </label>
       {articles !== null
         ? articles.map((article) => (
-            <RedditPosts key={uuidv4()} article={article.data} />
+            <RedditPosts
+              key={uuidv4()}
+              article={article.data}
+              setShowChat={setShowChat}
+              socket={socket}
+            />
           ))
         : ""}
     </div>
