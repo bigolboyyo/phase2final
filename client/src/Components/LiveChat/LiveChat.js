@@ -7,11 +7,17 @@ import ChatLogin from "./ChatLogin";
 // const socket = io.connect("http://localhost:5050/");
 // console.log(socket);
 
-export default function LiveChat({ socket, setShowChat, showChat }) {
+export default function LiveChat({
+  socket,
+  setShowChat,
+  showChat,
+  setRoom,
+  room,
+}) {
   // console.log(socket);
   // debugger;
   const [userName, setUserName] = useState("");
-  const [room, setRoom] = useState("");
+  // const [room, setRoom] = useState("");
 
   const joinRoom = () => {
     if (userStateCheck) {

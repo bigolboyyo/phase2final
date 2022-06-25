@@ -3,23 +3,11 @@ import "./RedditPosts.css";
 import redditLogo from "/home/grantwe/project2/client/src/media/Reddit_Mark_OnWhite.png";
 import { useNavigate } from "react-router-dom";
 
-function RedditPosts({
-  article,
-  socket,
-  // setShowChat,
-  // setChatType,
-  // chatType,
-  setRedditRoom,
-  setArtRef,
-}) {
+function RedditPosts({ article, socket, setRedditRoom, setArtRef }) {
   const navigate = useNavigate();
-
-  // console.log(article);
 
   function handleChatClick() {
     socket.emit("join_room", article.id);
-    // setShowChat(true);
-    // setChatType("/redditchat");
     setRedditRoom(article.id);
     setArtRef(article);
     navigate("/redditchat");

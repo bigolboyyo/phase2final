@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import NavBar from "../Components/NavBar/NavBar";
@@ -8,27 +8,29 @@ import RedditPage from "../Components/RedditPage/RedditPage";
 import io from "socket.io-client";
 import RedditChat from "../Components/RedditChat/RedditChat";
 
-//branch4 commit
-
-const socket = io.connect("http://localhost:5050/");
-
 function App() {
+  function establishConnection() {
+    const socket = io.connect("http://localhost:5050/");
+
+    return socket;
+  }
+
+  const socket = establishConnection();
+
   const [showChat, setShowChat] = useState(false);
-  const [chatType, setChatType] = useState("/livechat");
   const [redditRoom, setRedditRoom] = useState("");
+  const [room, setRoom] = useState("");
   const [artRef, setArtRef] = useState({});
 
   return (
     <div className="App">
       <NavBar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home socket={socket} />} />
         <Route
           path="/redditpage"
           element={
             <RedditPage
-              setChatType={setChatType}
-              chatType={chatType}
               socket={socket}
               setShowChat={setShowChat}
               setRedditRoom={setRedditRoom}
@@ -43,6 +45,8 @@ function App() {
               socket={socket}
               setShowChat={setShowChat}
               showChat={showChat}
+              room={room}
+              setRoom={setRoom}
             />
           }
         />
