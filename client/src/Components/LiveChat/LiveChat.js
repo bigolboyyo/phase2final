@@ -2,10 +2,6 @@ import React, { useState } from "react";
 import "./LiveChat.css";
 import ChatRoom from "../ChatRoom/ChatRoom";
 import ChatLogin from "./ChatLogin";
-// import io from "socket.io-client";
-
-// const socket = io.connect("http://localhost:5050/");
-// console.log(socket);
 
 export default function LiveChat({
   socket,
@@ -14,11 +10,13 @@ export default function LiveChat({
   setRoom,
   room,
   userName,
+  postUserDB,
 }) {
   const joinRoom = () => {
     if (userStateCheck) {
       socket.emit("join_room", room);
       setShowChat(true);
+      postUserDB();
     } else {
       alert("Please Set User Name!");
     }

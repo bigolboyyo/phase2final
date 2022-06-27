@@ -1,4 +1,9 @@
 .home {
-  background-color: aqua;
   text-align: center;
+}
+
+.userInfo {
+  border: solid;
+  padding: 1rem;
+  margin: 1rem;
 }

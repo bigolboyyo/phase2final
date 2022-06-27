@@ -17,9 +17,33 @@ const socket = establishConnection();
 function App() {
   const [showChat, setShowChat] = useState(false);
   const [redditRoom, setRedditRoom] = useState("");
+  const [redditTitle, setRedditTitle] = useState("");
   const [room, setRoom] = useState("");
   const [artRef, setArtRef] = useState({});
   const [userName, setUserName] = useState("");
+
+  const roomData = {
+    room: room,
+    userName: userName,
+    redditRoom: redditRoom,
+  };
+
+  function postUserDB() {
+    fetch("http://localhost:3004/rooms", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(roomData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
 
   return (
     <div className="App">
@@ -34,6 +58,7 @@ function App() {
               setUserName={setUserName}
               manualRoom={room}
               redditRoom={redditRoom}
+              redditTitle={redditTitle}
             />
           }
         />
@@ -45,6 +70,9 @@ function App() {
               setShowChat={setShowChat}
               setRedditRoom={setRedditRoom}
               setArtRef={setArtRef}
+              userName={userName}
+              setRedditTitle={setRedditTitle}
+              postUserDB={postUserDB}
             />
           }
         />
@@ -58,6 +86,7 @@ function App() {
               room={room}
               setRoom={setRoom}
               userName={userName}
+              postUserDB={postUserDB}
             />
           }
         />
@@ -68,6 +97,7 @@ function App() {
               socket={socket}
               redditRoom={redditRoom}
               artRef={artRef}
+              userName={userName}
             />
           }
         />

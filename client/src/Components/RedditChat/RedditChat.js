@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import "./RedditChat.css";
 import redditLogo from "/home/grantwe/project2/client/src/media/Reddit_Mark_OnWhite.png";
 
-function RedditChat({ socket, article, redditRoom, artRef }) {
+function RedditChat({ socket, article, redditRoom, artRef, userName }) {
   const [currentMsg, setCurrentMsg] = useState("");
   const [messageList, setMessageList] = useState([]);
 
@@ -11,7 +11,7 @@ function RedditChat({ socket, article, redditRoom, artRef }) {
     if (currentMsg !== "") {
       const messageData = {
         room: redditRoom,
-        // author: username,
+        author: userName,
         message: currentMsg,
         time:
           new Date(Date.now()).getHours() +
@@ -74,7 +74,11 @@ function RedditChat({ socket, article, redditRoom, artRef }) {
                 </div>
                 <div className="messageMeta">
                   <p>{messageCont.time}</p>
-                  <p>{messageCont.author}</p>
+                  <p>
+                    {messageCont.author !== ""
+                      ? messageCont.author
+                      : "Anonymous"}
+                  </p>
                 </div>
               </>
             </div>
