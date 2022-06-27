@@ -13,13 +13,15 @@ function RedditPosts({
 }) {
   const navigate = useNavigate();
 
-  function handleChatClick() {
-    postUserDB();
+  async function handleChatClick() {
     socket.emit("join_room", article.id);
+    console.log(article.id);
+    //app is re rendering causing new connection
     setRedditRoom(article.id);
     setRedditTitle(article.title);
     setArtRef(article);
     navigate("/redditchat");
+    await postUserDB();
   }
 
   return (

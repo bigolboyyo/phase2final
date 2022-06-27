@@ -22,27 +22,30 @@ function App() {
   const [artRef, setArtRef] = useState({});
   const [userName, setUserName] = useState("");
 
-  const roomData = {
-    room: room,
-    userName: userName,
-    redditRoom: redditRoom,
-  };
-
-  function postUserDB() {
-    fetch("http://localhost:3004/rooms", {
+  async function postUserDB() {
+    let response = await fetch("http://localhost:3004/rooms", {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(roomData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+      body: JSON.stringify({
+        userName: userName,
+        room: room,
+        redditRoom: redditRoom,
+      }),
+    });
+    response = await response.json();
+    console.log("Success: ", response);
+    setRedditRoom(response.room);
+    return;
+    // .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log("Success:", data);
+    //     setRedditRoom(data.room);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error:", error);
+    //   });
   }
 
   return (
@@ -95,6 +98,7 @@ function App() {
           element={
             <RedditChat
               socket={socket}
+              setRedditRoom={setRedditRoom}
               redditRoom={redditRoom}
               artRef={artRef}
               userName={userName}
