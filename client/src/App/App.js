@@ -22,31 +22,30 @@ function App() {
   const [artRef, setArtRef] = useState({});
   const [userName, setUserName] = useState("");
 
-  async function postUserDB() {
-    let response = await fetch("http://localhost:3004/rooms", {
-      method: "POST", // or 'PUT'
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userName: userName,
-        room: room,
-        redditRoom: redditRoom,
-      }),
-    });
-    response = await response.json();
-    console.log("Success: ", response);
-    setRedditRoom(response.room);
-    return;
-    // .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log("Success:", data);
-    //     setRedditRoom(data.room);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
-  }
+  //FOR SOME FUCKING REASON THE FETCH CAUSE RE RENDER!!!!!
+
+  // const roomData = {
+  //   room: room,
+  //   userName: userName,
+  //   redditRoom: redditRoom,
+  // };
+
+  // function postUserDB() {
+  //   fetch("http://localhost:3004/rooms", {
+  //     method: "POST", // or 'PUT'
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(roomData),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log("Success:", data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error:", error);
+  //     });
+  // }
 
   return (
     <div className="App">
@@ -75,7 +74,7 @@ function App() {
               setArtRef={setArtRef}
               userName={userName}
               setRedditTitle={setRedditTitle}
-              postUserDB={postUserDB}
+              // postUserDB={postUserDB}
             />
           }
         />
@@ -89,7 +88,7 @@ function App() {
               room={room}
               setRoom={setRoom}
               userName={userName}
-              postUserDB={postUserDB}
+              // postUserDB={postUserDB}
             />
           }
         />
@@ -98,7 +97,6 @@ function App() {
           element={
             <RedditChat
               socket={socket}
-              setRedditRoom={setRedditRoom}
               redditRoom={redditRoom}
               artRef={artRef}
               userName={userName}
