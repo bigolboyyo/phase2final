@@ -22,32 +22,32 @@ function App() {
   const [artRef, setArtRef] = useState({});
   const [userName, setUserName] = useState("");
 
-  //FOR SOME FUCKING REASON THE FETCH CAUSE RE RENDER!!!!!
+  //FOR SOME FUCKING REASON THE FETCH CAUSE RE RENDER/re connection
 
-  const roomData = {
-    room: room,
+  const userData = {
     userName: userName,
+    room: room,
     redditRoom: redditRoom,
   };
 
-  console.log(roomData);
+  console.log(userData);
 
-  // function postUserDB() {
-  //   fetch("http://localhost:3004/rooms", {
-  //     method: "POST", // or 'PUT'
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(roomData),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log("Success:", data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error:", error);
-  //     });
-  // }
+  function postUserDB() {
+    fetch("http://localhost:3004/userData", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
 
   return (
     <div className="App">
@@ -76,7 +76,7 @@ function App() {
               setArtRef={setArtRef}
               userName={userName}
               setRedditTitle={setRedditTitle}
-              // postUserDB={postUserDB}
+              postUserDB={postUserDB}
             />
           }
         />
@@ -90,7 +90,7 @@ function App() {
               room={room}
               setRoom={setRoom}
               userName={userName}
-              // postUserDB={postUserDB}
+              postUserDB={postUserDB}
             />
           }
         />
