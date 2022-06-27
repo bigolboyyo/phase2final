@@ -24,11 +24,13 @@ function App() {
 
   //FOR SOME FUCKING REASON THE FETCH CAUSE RE RENDER!!!!!
 
-  // const roomData = {
-  //   room: room,
-  //   userName: userName,
-  //   redditRoom: redditRoom,
-  // };
+  const roomData = {
+    room: room,
+    userName: userName,
+    redditRoom: redditRoom,
+  };
+
+  console.log(roomData);
 
   // function postUserDB() {
   //   fetch("http://localhost:3004/rooms", {
