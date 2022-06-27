@@ -8,25 +8,35 @@ import RedditPage from "../Components/RedditPage/RedditPage";
 import io from "socket.io-client";
 import RedditChat from "../Components/RedditChat/RedditChat";
 
+const establishConnection = () => {
+  const socket = io.connect("http://localhost:5050/");
+  return socket;
+};
+const socket = establishConnection();
+
 function App() {
-  function establishConnection() {
-    const socket = io.connect("http://localhost:5050/");
-
-    return socket;
-  }
-
-  const socket = establishConnection();
-
   const [showChat, setShowChat] = useState(false);
   const [redditRoom, setRedditRoom] = useState("");
   const [room, setRoom] = useState("");
   const [artRef, setArtRef] = useState({});
+  const [userName, setUserName] = useState("");
 
   return (
     <div className="App">
       <NavBar />
       <Routes>
-        <Route path="/" element={<Home socket={socket} />} />
+        <Route
+          path="/"
+          element={
+            <Home
+              socket={socket}
+              userName={userName}
+              setUserName={setUserName}
+              manualRoom={room}
+              redditRoom={redditRoom}
+            />
+          }
+        />
         <Route
           path="/redditpage"
           element={
@@ -47,6 +57,7 @@ function App() {
               showChat={showChat}
               room={room}
               setRoom={setRoom}
+              userName={userName}
             />
           }
         />

@@ -13,44 +13,26 @@ export default function LiveChat({
   showChat,
   setRoom,
   room,
+  userName,
 }) {
-  // console.log(socket);
-  // debugger;
-  const [userName, setUserName] = useState("");
-  // const [room, setRoom] = useState("");
-
   const joinRoom = () => {
     if (userStateCheck) {
       socket.emit("join_room", room);
       setShowChat(true);
+    } else {
+      alert("Please Set User Name!");
     }
   };
 
-  // const [showChat, setShowChat] = useState(false);
-
   const userStateCheck = userName !== "" && room !== "";
-
-  // useEffect(() => {
-  //   const socket = io.connect("http://localhost:5050/livechat");
-
-  //   return () => socket.disconnect();
-  // }, []);
 
   return (
     <div id="prelogin">
       {!showChat ? (
-        <ChatLogin
-          setUserName={setUserName}
-          setRoom={setRoom}
-          joinRoom={joinRoom}
-        />
+        <ChatLogin setRoom={setRoom} joinRoom={joinRoom} />
       ) : (
         <div id="postLogin">
-          <ChatLogin
-            setUserName={setUserName}
-            setRoom={setRoom}
-            joinRoom={joinRoom}
-          />
+          <ChatLogin setRoom={setRoom} joinRoom={joinRoom} />
           <ChatRoom socket={socket} username={userName} room={room} />
         </div>
       )}
