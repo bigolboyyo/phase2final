@@ -10,17 +10,23 @@ function RedditPosts({
   setArtRef,
   setRedditTitle,
   postUserDB,
+  redditRoom,
 }) {
   const navigate = useNavigate();
 
-  async function handleChatClick() {
+  function handleChatClick() {
+    socket.emit("join_room", article.id);
+    console.log(article.id);
     //app is re rendering causing new connection due to fetch
-    setRedditRoom(article.id);
-    await postUserDB();
     setRedditTitle(article.title);
     setArtRef(article);
-    socket.emit("join_room", article.id);
+    setRedditRoom(article.id);
     navigate("/redditchat");
+  }
+
+  function handleAndUpdate() {
+    handleChatClick();
+    postUserDB();
   }
 
   return (
@@ -48,7 +54,7 @@ function RedditPosts({
       <span id="redUpvotes">Upvotes: {article.ups}</span>
 
       <button
-        onClick={handleChatClick}
+        onClick={handleAndUpdate}
         style={{ padding: "1rem" }}
         id="start-chat"
       >

@@ -30,11 +30,9 @@ function App() {
     redditRoom: redditRoom,
   };
 
-  console.log(userData);
-
   function postUserDB() {
     fetch("http://localhost:3004/userData", {
-      method: "POST", // or 'PUT'
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -77,6 +75,7 @@ function App() {
               userName={userName}
               setRedditTitle={setRedditTitle}
               postUserDB={postUserDB}
+              redditRoom={redditRoom}
             />
           }
         />

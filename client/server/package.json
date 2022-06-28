@@ -6,6 +6,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js"
   },
+  "nodemonConfig": {
+    "ignore": [
+      "/home/grantwe/project2/client/server/db/db.json"
+    ]
+  },
   "author": "",
   "license": "ISC",
   "description": "",
