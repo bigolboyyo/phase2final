@@ -11,6 +11,9 @@ export default function RedditPage({
   setRedditTitle,
   postUserDB,
   redditRoom,
+  putUserDB,
+  fetchJSON,
+  jsonData,
 }) {
   const [articles, setArticles] = useState([]);
   const [subreddit, setSubreddit] = useState("webdev");
@@ -54,7 +57,11 @@ export default function RedditPage({
               setArtRef={setArtRef}
               setRedditTitle={setRedditTitle}
               postUserDB={postUserDB}
+              putUserDB={putUserDB}
               redditRoom={redditRoom}
+              userName={userName}
+              fetchJSON={fetchJSON}
+              jsonData={jsonData}
             />
           ))
         : ""}

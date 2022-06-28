@@ -16,36 +16,90 @@ const socket = establishConnection();
 
 function App() {
   const [showChat, setShowChat] = useState(false);
-  const [redditRoom, setRedditRoom] = useState("");
   const [redditTitle, setRedditTitle] = useState("");
   const [room, setRoom] = useState("");
+  const [redditRoom, setRedditRoom] = useState("");
   const [artRef, setArtRef] = useState({});
   const [userName, setUserName] = useState("");
 
-  //FOR SOME FUCKING REASON THE FETCH CAUSE RE RENDER/re connection
+  // async function postUserDB(info) {
+  //   const userData = {
+  //     room: info.redditRoom || info.room,
+  //     userName,
+  //   };
+  //   fetch("http://localhost:3004/userData", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(userData),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setRoom(room);
+  //       console.log("Success:", data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error:", error);
+  //     });
+  // }
 
-  const userData = {
-    userName: userName,
-    room: room,
-    redditRoom: redditRoom,
-  };
+  const [jsonData, setJsonData] = useState([]);
 
-  function postUserDB() {
-    fetch("http://localhost:3004/userData", {
+  function fetchJSON() {
+    //simply grab all data
+    fetch(`http://localhost:3004/userData`).then((r) => {
+      if (r.status !== 200) {
+        console.log(`${r.status} : Error has occured.`);
+        return;
+      }
+      r.json().then((data) => {
+        setJsonData(data);
+      });
+    });
+  }
+
+  const postUserDB = async (info) => {
+    const roomData = {
+      redditTitle: info.redditTitle,
+      room: info.redditRoom || info.room,
+      author: userName,
+    };
+
+    let response = await fetch("http://localhost:3004/userData", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(userData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  }
+      body: JSON.stringify(roomData),
+    });
+
+    response = await response.json();
+    console.log(response);
+    setRoom(room);
+    return response;
+  };
+
+  const putUserDB = async (info) => {
+    const roomData = {
+      redditTitle: info.redditTitle,
+      room: info.redditRoom || info.room,
+      author: userName,
+    };
+
+    let response = await fetch("http://localhost:3004/userData", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(roomData),
+    });
+
+    response = await response.json();
+    console.log(response);
+    setRoom(room);
+    return response;
+  };
 
   return (
     <div className="App">
@@ -69,13 +123,15 @@ function App() {
           element={
             <RedditPage
               socket={socket}
-              setShowChat={setShowChat}
               setRedditRoom={setRedditRoom}
               setArtRef={setArtRef}
               userName={userName}
               setRedditTitle={setRedditTitle}
               postUserDB={postUserDB}
+              putUserDB={putUserDB}
               redditRoom={redditRoom}
+              fetchJSON={fetchJSON}
+              jsonData={jsonData}
             />
           }
         />
@@ -98,9 +154,9 @@ function App() {
           element={
             <RedditChat
               socket={socket}
-              redditRoom={redditRoom}
               artRef={artRef}
               userName={userName}
+              redditRoom={redditRoom}
             />
           }
         />

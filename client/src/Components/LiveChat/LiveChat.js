@@ -16,7 +16,7 @@ export default function LiveChat({
     if (userStateCheck) {
       socket.emit("join_room", room);
       setShowChat(true);
-      postUserDB();
+      postUserDB({ author: userName, room: room });
     } else {
       alert("Please Set User Name!");
     }

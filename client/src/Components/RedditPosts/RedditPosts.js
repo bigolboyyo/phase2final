@@ -10,23 +10,46 @@ function RedditPosts({
   setArtRef,
   setRedditTitle,
   postUserDB,
+  putUserDB,
   redditRoom,
+  userName,
+  fetchJSON,
+  jsonData,
 }) {
   const navigate = useNavigate();
 
   function handleChatClick() {
+    fetchJSON();
+    console.log(jsonData);
+    jsonData.map((data) =>
+      data.author === userName
+        ? putUserDB({
+            article: article,
+            author: userName,
+            redditTitle: article.title,
+            redditRoom: article.id,
+          })
+        : postUserDB({
+          article: article,
+          author: userName,
+          redditTitle: article.title,
+          redditRoom: article.id,
+        });
+    );
+
     socket.emit("join_room", article.id);
-    console.log(article.id);
-    //app is re rendering causing new connection due to fetch
-    setRedditTitle(article.title);
+
     setArtRef(article);
     setRedditRoom(article.id);
-    navigate("/redditchat");
-  }
+    setRedditTitle(article.title);
 
-  function handleAndUpdate() {
-    handleChatClick();
-    postUserDB();
+    postUserDB({
+      article: article,
+      author: userName,
+      redditTitle: article.title,
+      redditRoom: article.id,
+    });
+    navigate("/redditchat");
   }
 
   return (
@@ -54,7 +77,7 @@ function RedditPosts({
       <span id="redUpvotes">Upvotes: {article.ups}</span>
 
       <button
-        onClick={handleAndUpdate}
+        onClick={handleChatClick}
         style={{ padding: "1rem" }}
         id="start-chat"
       >
