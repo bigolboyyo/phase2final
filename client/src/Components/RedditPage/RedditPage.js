@@ -13,7 +13,7 @@ export default function RedditPage({
   redditRoom,
   putUserDB,
   fetchJSON,
-  jsonData,
+  // jsonData,
 }) {
   const [articles, setArticles] = useState([]);
   const [subreddit, setSubreddit] = useState("webdev");
@@ -61,7 +61,7 @@ export default function RedditPage({
               redditRoom={redditRoom}
               userName={userName}
               fetchJSON={fetchJSON}
-              jsonData={jsonData}
+              // jsonData={jsonData}
             />
           ))
         : ""}

@@ -14,47 +14,73 @@ function RedditPosts({
   redditRoom,
   userName,
   fetchJSON,
-  jsonData,
+  // jsonData,
 }) {
   const navigate = useNavigate();
 
-  // function postOrPut() {
-  //   const update = jsonData.map((data) =>
-  //     data.author === userName
-  //       ? putUserDB({
-  //           article: article,
-  //           author: userName,
-  //           redditTitle: article.title,
-  //           redditRoom: article.id,
-  //         })
-  //       : postUserDB({
-  //           article: article,
-  //           author: userName,
-  //           redditTitle: article.title,
-  //           redditRoom: article.id,
-  //         })
-  //   );
-  //   console.log(update);
-  //   return update;
-  // }
-
   async function handleChatClick() {
+    //sets state for article reference, reddit room, and title
     setArtRef(article);
     setRedditRoom(article.id);
     setRedditTitle(article.title);
 
-    await fetchJSON();
-    // postOrPut();
+    //grabs the current data before any posting/patching happens
+    const jsonData = await fetchJSON();
+    // const jsonData = await data.JSON();
     console.log(jsonData);
+    //console.log(jsonData);
+    // postOrPut();
 
+    //joins room
     socket.emit("join_room", article.id);
 
-    postUserDB({
-      article: article,
-      author: userName,
-      redditTitle: article.title,
-      redditRoom: article.id,
+    //json data doesn't exist ?? so we have to post
+    // if (jsonData.length === 0) {
+    //   console.log(jsonData);
+    //   postUserDB({
+    //     article: article,
+    //     author: userName,
+    //     redditTitle: article.title,
+    //     redditRoom: article.id,
+    //   });
+    // } else {
+    //do we find that the current userName(state) is equal to the data.author in DB?
+    const user = jsonData.find((data) => {
+      console.log(data);
+      console.log(userName);
+      const update = data.author === userName;
+      return update;
     });
+
+    /*
+      If no data, post user data
+      If user exists, then patch the user data
+
+      Not Patch/Putting because not referencing ID? top level?
+
+      how does PUT work? you can't use Query parameters! 
+
+      ASYNC ISSUE???
+      jsonData is not getting populated in time? 
+
+     ** it's not finding update === true on the first run through! **
+      */
+
+    user
+      ? putUserDB({
+          id: user.id,
+          article: article,
+          author: userName,
+          redditTitle: article.title,
+          redditRoom: article.id,
+        })
+      : postUserDB({
+          article: article,
+          author: userName,
+          redditTitle: article.title,
+          redditRoom: article.id,
+        });
+
     navigate("/redditchat");
   }
 

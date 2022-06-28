@@ -22,42 +22,7 @@ function App() {
   const [artRef, setArtRef] = useState({});
   const [userName, setUserName] = useState("");
 
-  // async function postUserDB(info) {
-  //   const userData = {
-  //     room: info.redditRoom || info.room,
-  //     userName,
-  //   };
-  //   fetch("http://localhost:3004/userData", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(userData),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setRoom(room);
-  //       console.log("Success:", data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error:", error);
-  //     });
-  // }
-
-  // function fetchJSON() {
-  //   //simply grab all data
-  //   fetch(`http://localhost:3004/userData`).then((r) => {
-  //     if (r.status !== 200) {
-  //       console.log(`${r.status} : Error has occured.`);
-  //       return;
-  //     }
-  //     r.json().then((data) => {
-  //       setJsonData(data);
-  //     });
-  //   });
-  // }
-
-  const [jsonData, setJsonData] = useState([]);
+  // const [jsonData, setJsonData] = useState([]);
 
   const fetchJSON = async () => {
     let response = await fetch("http://localhost:3004/userData", {
@@ -68,8 +33,10 @@ function App() {
     });
 
     response = await response.json();
-    console.log(response);
-    setJsonData(response);
+    //console.log(response);
+    // setJsonData(response);
+    //console.log(jsonData);
+    return response;
   };
 
   const postUserDB = async (info) => {
@@ -88,7 +55,7 @@ function App() {
     });
 
     response = await response.json();
-    console.log(response);
+    //console.log(response);
     setRoom(room);
     return response;
   };
@@ -100,7 +67,11 @@ function App() {
       author: userName,
     };
 
-    let response = await fetch("http://localhost:3004/userData", {
+    console.log(info);
+
+    console.log(JSON.stringify(roomData));
+
+    let response = await fetch(`http://localhost:3004/userData/${info.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -144,7 +115,7 @@ function App() {
               putUserDB={putUserDB}
               redditRoom={redditRoom}
               fetchJSON={fetchJSON}
-              jsonData={jsonData}
+              // jsonData={jsonData}
             />
           }
         />

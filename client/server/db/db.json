@@ -1,3 +1,16 @@
 {
-  "userData": []
+  "userData": [
+    {
+      "redditTitle": "Negatives comments on my r/webdev post led to this moment...",
+      "room": "vlv6rt",
+      "author": "Colton",
+      "id": 1
+    },
+    {
+      "redditTitle": "Switching from windows to OSX, what to know?",
+      "room": "vmi6kb",
+      "author": "Tom",
+      "id": 2
+    }
+  ]
 }
