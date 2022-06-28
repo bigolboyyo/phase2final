@@ -44,20 +44,33 @@ function App() {
   //     });
   // }
 
+  // function fetchJSON() {
+  //   //simply grab all data
+  //   fetch(`http://localhost:3004/userData`).then((r) => {
+  //     if (r.status !== 200) {
+  //       console.log(`${r.status} : Error has occured.`);
+  //       return;
+  //     }
+  //     r.json().then((data) => {
+  //       setJsonData(data);
+  //     });
+  //   });
+  // }
+
   const [jsonData, setJsonData] = useState([]);
 
-  function fetchJSON() {
-    //simply grab all data
-    fetch(`http://localhost:3004/userData`).then((r) => {
-      if (r.status !== 200) {
-        console.log(`${r.status} : Error has occured.`);
-        return;
-      }
-      r.json().then((data) => {
-        setJsonData(data);
-      });
+  const fetchJSON = async () => {
+    let response = await fetch("http://localhost:3004/userData", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
-  }
+
+    response = await response.json();
+    console.log(response);
+    setJsonData(response);
+  };
 
   const postUserDB = async (info) => {
     const roomData = {

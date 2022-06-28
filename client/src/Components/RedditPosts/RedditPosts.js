@@ -18,30 +18,36 @@ function RedditPosts({
 }) {
   const navigate = useNavigate();
 
-  function handleChatClick() {
-    fetchJSON();
-    console.log(jsonData);
-    jsonData.map((data) =>
-      data.author === userName
-        ? putUserDB({
-            article: article,
-            author: userName,
-            redditTitle: article.title,
-            redditRoom: article.id,
-          })
-        : postUserDB({
-          article: article,
-          author: userName,
-          redditTitle: article.title,
-          redditRoom: article.id,
-        });
-    );
+  // function postOrPut() {
+  //   const update = jsonData.map((data) =>
+  //     data.author === userName
+  //       ? putUserDB({
+  //           article: article,
+  //           author: userName,
+  //           redditTitle: article.title,
+  //           redditRoom: article.id,
+  //         })
+  //       : postUserDB({
+  //           article: article,
+  //           author: userName,
+  //           redditTitle: article.title,
+  //           redditRoom: article.id,
+  //         })
+  //   );
+  //   console.log(update);
+  //   return update;
+  // }
 
-    socket.emit("join_room", article.id);
-
+  async function handleChatClick() {
     setArtRef(article);
     setRedditRoom(article.id);
     setRedditTitle(article.title);
+
+    await fetchJSON();
+    // postOrPut();
+    console.log(jsonData);
+
+    socket.emit("join_room", article.id);
 
     postUserDB({
       article: article,
