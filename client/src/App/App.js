@@ -111,10 +111,18 @@ function App() {
     return removal;
   };
 
-  //deleteFetch();
-  //deleteData();
+  //socket.on("disconnect", deleteData());
 
-  socket.on("disconnect", deleteData());
+  /*
+  we want to delete the userData once the user is no longer active -
+  
+  //FIXME: currently we are deleting based on when the username matches a json author name and disconnects
+
+  //TODO: the idea should be whenever username state updates? so if username state is no longer what it was 
+          and a json entry exists that matches it's previous state, delete that entry
+
+          this will prevent the bug of being able to change name outside of a disconnect
+  */
 
   return (
     <div className="App">
