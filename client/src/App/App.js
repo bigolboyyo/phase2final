@@ -22,8 +22,6 @@ function App() {
   const [artRef, setArtRef] = useState({});
   const [userName, setUserName] = useState("");
 
-  // const [jsonData, setJsonData] = useState([]);
-
   const fetchJSON = async () => {
     let response = await fetch("http://localhost:3004/userData", {
       method: "GET",
@@ -34,8 +32,6 @@ function App() {
 
     response = await response.json();
     //console.log(response);
-    // setJsonData(response);
-    //console.log(jsonData);
     return response;
   };
 
@@ -55,7 +51,6 @@ function App() {
     });
 
     response = await response.json();
-    //console.log(response);
     setRoom(room);
     return response;
   };
@@ -80,10 +75,46 @@ function App() {
     });
 
     response = await response.json();
-    console.log(response);
+    // console.log(response);
     setRoom(room);
     return response;
   };
+
+  const deleteFetch = async (id) => {
+    const deleteMethod = {
+      method: "DELETE", // Method itself
+      headers: {
+        "Content-type": "application/json; charset=UTF-8", // Indicates the content
+      },
+      // No need to have body, because we don't send nothing to the server.
+    };
+
+    const deletion = await fetch(
+      `http://localhost:3004/userData/${id}`,
+      deleteMethod
+    )
+      .then((response) => response.json())
+      .then((data) => console.log(data)) // Manipulate the data retrieved back, if we want to do something with it
+      .catch((err) => console.log(err));
+    return deletion;
+  };
+
+  const deleteData = async () => {
+    const data = await fetchJSON();
+    console.log(data);
+
+    const removal = data.find((user) => {
+      return user.author === userName
+        ? deleteFetch(user.id)
+        : console.log("no user");
+    });
+    return removal;
+  };
+
+  //deleteFetch();
+  //deleteData();
+
+  socket.on("disconnect", deleteData());
 
   return (
     <div className="App">

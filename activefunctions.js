@@ -40,7 +40,8 @@ function deleteData(id) {
   //need to grab the id of each room, probably do it for whether it's a reddit chat or manual chat
   fetch(`http://localhost:3004/rooms/2`, {
     method: "DELETE",
-    body: JSON.stringify(data.username),
+  }).catch((error) => {
+    console.error("Error:", error);
   });
 }
 
