@@ -21,10 +21,9 @@ function RedditPosts({
     setArtRef(article);
     setRedditRoom(article.id);
     setRedditTitle(article.title);
+    socket.emit("join_room", article.id);
 
     const jsonData = await fetchJSON();
-
-    socket.emit("join_room", article.id);
 
     const user = jsonData.find((data) => {
       const update = data.author === userName;
