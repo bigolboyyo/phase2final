@@ -111,7 +111,7 @@ function App() {
     return removal;
   };
 
-  // socket.on("disconnect", deleteData());
+  //socket.on("disconnect", deleteData());
 
   /*
   we want to delete the userData once the user is no longer active -
